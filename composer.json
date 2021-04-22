@@ -1,0 +1,18 @@
+{
+    "name": "meom/meom-3rd-party-scripts",
+    "version": "1.0.0",
+    "description": "Create settings for 3rd party script like Google Tag Manager and Cookiebot.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "MEOM tech",
+            "email": "tech@meom.fi"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "meom/phpcs-composer": "dev-main"
+    },
+    "minimum-stability": "dev"
+}
