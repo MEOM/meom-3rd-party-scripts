@@ -17,3 +17,11 @@ You can modify the output with following filters:
 - mtps_cookiebot_id
 - mtps_cookiebot_code
 - mtps_gtm_body_code
+
+## Cookie declaration
+
+Cookie declaration text can be added using shortcode:
+
+```php
+[mtps-cookie-declaration]
+```
