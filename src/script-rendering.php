@@ -15,9 +15,39 @@ function mtps_head_scripts() {
     // Cookiebot settings.
     $cookiebot_field_value = mtps_get_field_value( 'mtps_cookiebot_field' );
     $cookiebot_id          = apply_filters( 'mtps_cookiebot_id', $cookiebot_field_value );
+    if ( $gtm_id && $cookiebot_id ) {
+        // If we have Cookiebot in use, we need data-cookieconsent attribute for the script.
+        $scripts_ignore = $cookiebot_id ? ' data-cookieconsent="ignore"' : '';
+
+        // Google consent code.
+        $gtm_consent_code =
+        "<!-- Google Consent Mode -->
+        <script" . $scripts_ignore . ">
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+            dataLayer.push(arguments)
+            }
+            gtag('consent', 'default', {
+            ad_storage: 'denied',
+            analytics_storage: 'denied',
+            functionality_storage: 'denied',
+            personalization_storage: 'denied',
+            security_storage: 'granted',
+            wait_for_update: 500
+            });
+            gtag('set', 'ads_data_redaction', true);
+            gtag('set', 'url_passthrough', true);
+        </script>
+        <!-- End Google Consent Mode-->";
+        // phpcs:disable
+        echo $gtm_consent_code;
+        // phpcs:enable
+    }
+
     if ( $gtm_id ) {
         // If we have Cookiebot in use, we need data-cookieconsent attribute for the script.
         $scripts_ignore = $cookiebot_id ? ' data-cookieconsent="ignore"' : '';
+
         // Set code.
         $gtm_code =
         "<!-- Google Tag Manager -->
