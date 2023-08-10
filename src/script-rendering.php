@@ -65,7 +65,7 @@ function mtps_head_scripts() {
 
     if ( $cookiebot_id ) {
         $current_locale = substr( get_locale(), 0, 2 );
-        $cookiebot_code = '<script async id="Cookiebot" data-culture="' . esc_attr( $current_locale ) . '" src="https://consent.cookiebot.com/uc.js" data-cbid="' . esc_attr( $cookiebot_id ) . '" data-blockingmode="auto"></script>';
+        $cookiebot_code = '<script id="Cookiebot" data-culture="' . esc_attr( $current_locale ) . '" src="https://consent.cookiebot.com/uc.js" data-cbid="' . esc_attr( $cookiebot_id ) . '" data-blockingmode="auto"></script>';
         $cookiebot_code = apply_filters( 'mtps_cookiebot_code', $cookiebot_code, $cookiebot_id );
         // phpcs:disable
         echo $cookiebot_code;
