@@ -64,4 +64,4 @@ function mtps_body_open_scripts() {
         // phpcs:enable
     }
 }
-add_action( 'wp_body_open', 'mtps_body_open_scripts' );
+add_action( 'wp_body_open', 'mtps_body_open_scripts', 0 );
