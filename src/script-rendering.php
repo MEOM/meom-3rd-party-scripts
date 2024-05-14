@@ -13,6 +13,7 @@ function mtps_head_scripts() {
     $gtm_field_value = mtps_get_field_value( 'mtps_gtm_field' );
     $gtm_id          = apply_filters( 'mtps_gtm_id', $gtm_field_value );
     // Cookiebot settings.
+    $cookiebot_no_head     = mtps_get_field_value( 'mtps_cookiebot_no_head' );
     $cookiebot_field_value = mtps_get_field_value( 'mtps_cookiebot_field' );
     $cookiebot_id          = apply_filters( 'mtps_cookiebot_id', $cookiebot_field_value );
     if ( $gtm_id ) {
@@ -33,7 +34,7 @@ function mtps_head_scripts() {
         // phpcs:enable
     }
 
-    if ( $cookiebot_id ) {
+    if ( $cookiebot_id && $cookiebot_no_head !== '1' ) {
         $current_locale = substr( get_locale(), 0, 2 );
         $cookiebot_code = '<script async id="Cookiebot" data-culture="' . esc_attr( $current_locale ) . '" src="https://consent.cookiebot.com/uc.js" data-cbid="' . esc_attr( $cookiebot_id ) . '" data-blockingmode="auto"></script>';
         $cookiebot_code = apply_filters( 'mtps_cookiebot_code', $cookiebot_code, $cookiebot_id );
