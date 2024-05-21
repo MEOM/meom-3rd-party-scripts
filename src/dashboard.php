@@ -47,6 +47,13 @@ function mtps_settings_init() {
         'mtps_plugin_section'
     );
 
+    add_settings_field(
+        'mtps_cookiebot_no_head',
+        __( 'Do not add Cookiebot code to the head', 'mtps' ),
+        'mtps_cookiebot_no_head_render',
+        'mtps_plugin',
+        'mtps_plugin_section'
+    );
 }
 
 /**
@@ -70,6 +77,19 @@ function mtps_cookiebot_field_render() {
     $field_value = mtps_get_field_value( 'mtps_cookiebot_field' );
     ?>
     <input type='text' name='mtps_settings[mtps_cookiebot_field]' value='<?php echo esc_attr( $field_value ); ?>' placeholder='xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'>
+    <?php
+}
+
+/**
+ * Render input for Cookiebot No head.
+ *
+ * @return void
+ */
+function mtps_cookiebot_no_head_render() {
+    $field_value = mtps_get_field_value( 'mtps_cookiebot_no_head' );
+    ?>
+    <input type='checkbox' name='mtps_settings[mtps_cookiebot_no_head]' value='1' <?php checked( 1, $field_value, true ); ?>>
+    <p><?php esc_html_e( 'You can still use shortcode', 'mtps' ); ?> <em>[mtps-cookie-declaration]</em></p>
     <?php
 }
 
