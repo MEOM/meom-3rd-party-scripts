@@ -16,9 +16,39 @@ function mtps_head_scripts() {
     $cookiebot_no_head     = mtps_get_field_value( 'mtps_cookiebot_no_head' );
     $cookiebot_field_value = mtps_get_field_value( 'mtps_cookiebot_field' );
     $cookiebot_id          = apply_filters( 'mtps_cookiebot_id', $cookiebot_field_value );
+    if ( $gtm_id && $cookiebot_id ) {
+        // If we have Cookiebot in use, we need data-cookieconsent attribute for the script.
+        $scripts_ignore = $cookiebot_id ? ' data-cookieconsent="ignore"' : '';
+
+        // Google consent code.
+        $gtm_consent_code =
+        "<!-- Google Consent Mode -->
+        <script" . $scripts_ignore . ">
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+            dataLayer.push(arguments)
+            }
+            gtag('consent', 'default', {
+            ad_storage: 'denied',
+            analytics_storage: 'denied',
+            functionality_storage: 'denied',
+            personalization_storage: 'denied',
+            security_storage: 'granted',
+            wait_for_update: 500
+            });
+            gtag('set', 'ads_data_redaction', true);
+            gtag('set', 'url_passthrough', true);
+        </script>
+        <!-- End Google Consent Mode-->";
+        // phpcs:disable
+        echo $gtm_consent_code;
+        // phpcs:enable
+    }
+
     if ( $gtm_id ) {
         // If we have Cookiebot in use, we need data-cookieconsent attribute for the script.
         $scripts_ignore = $cookiebot_id ? ' data-cookieconsent="ignore"' : '';
+
         // Set code.
         $gtm_code =
         "<!-- Google Tag Manager -->
@@ -36,7 +66,7 @@ function mtps_head_scripts() {
 
     if ( $cookiebot_id && $cookiebot_no_head !== '1' ) {
         $current_locale = substr( get_locale(), 0, 2 );
-        $cookiebot_code = '<script async id="Cookiebot" data-culture="' . esc_attr( $current_locale ) . '" src="https://consent.cookiebot.com/uc.js" data-cbid="' . esc_attr( $cookiebot_id ) . '" data-blockingmode="auto"></script>';
+        $cookiebot_code = '<script id="Cookiebot" data-culture="' . esc_attr( $current_locale ) . '" src="https://consent.cookiebot.com/uc.js" data-cbid="' . esc_attr( $cookiebot_id ) . '" data-blockingmode="auto"></script>';
         $cookiebot_code = apply_filters( 'mtps_cookiebot_code', $cookiebot_code, $cookiebot_id );
         // phpcs:disable
         echo $cookiebot_code;
