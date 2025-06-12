@@ -16,6 +16,7 @@ You can modify the output with following filters:
 - mtps_gtm_head_code
 - mtps_cookiebot_id
 - mtps_cookiebot_code
+- mtps_cookiebot_consent_mode
 - mtps_gtm_body_code
 
 ## Cookie declaration
