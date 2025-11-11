@@ -21,7 +21,7 @@ function mtps_head_scripts() {
         // If we have Cookiebot in use, we need to set the consent mode.
         $cookiebot_consent_mode = "
             <!-- Google Consent Mode -->
-            <script data-cookieconsent='ignore' async>
+            <script data-cookieconsent='ignore'>
             window.dataLayer = window.dataLayer || [];
             function gtag() {
                 dataLayer.push(arguments)
