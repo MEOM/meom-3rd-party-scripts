@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 1.2.5 released February 12, 2026
+- Version bump, handle release info
+
+## Version 1.2.4 released February 12, 2026
+- Tweaking script rendering for better cookie handling
+
 ## Version 1.2.0 released June 12, 2025
 - Change the order of scripts. Add consent mode script automatically after Cookiebot script.
 

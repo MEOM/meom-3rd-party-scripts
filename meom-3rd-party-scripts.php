@@ -5,7 +5,7 @@
  * Author: MEOM
  * Author URI: https://www.meom.fi/
  * Description: Create settings for 3rd party script like Google Tag Manager and Cookiebot.
- * Version: 1.2.2
+ * Version: 1.2.5
  */
 
 // Exit if accessed directly.
