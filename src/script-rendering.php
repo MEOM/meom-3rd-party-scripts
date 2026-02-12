@@ -21,7 +21,7 @@ function mtps_head_scripts() {
         // If we have Cookiebot in use, we need to set the consent mode.
         $cookiebot_consent_mode = "
             <!-- Google Consent Mode -->
-            <script data-cookieconsent='ignore'>
+            <script data-cookieconsent='ignore' async>
             window.dataLayer = window.dataLayer || [];
             function gtag() {
                 dataLayer.push(arguments)
@@ -31,7 +31,7 @@ function mtps_head_scripts() {
                 ad_storage: 'denied',
                 ad_user_data: 'denied',
                 analytics_storage: 'denied',
-                functionality_storage: 'granted',
+                functionality_storage: 'denied',
                 personalization_storage: 'denied',
                 security_storage: 'granted',
                 wait_for_update: 500
@@ -47,7 +47,7 @@ function mtps_head_scripts() {
         // phpcs:enable
 
         $current_locale = substr( get_locale(), 0, 2 );
-        $cookiebot_code = '<script async id="Cookiebot" data-culture="' . esc_attr( $current_locale ) . '" src="https://consent.cookiebot.com/uc.js" data-cbid="' . esc_attr( $cookiebot_id ) . '" data-blockingmode="auto"></script>';
+        $cookiebot_code = '<script id="Cookiebot" data-culture="' . esc_attr( $current_locale ) . '" src="https://consent.cookiebot.com/uc.js" data-cbid="' . esc_attr( $cookiebot_id ) . '" data-blockingmode="auto"></script>';
         $cookiebot_code = apply_filters( 'mtps_cookiebot_code', $cookiebot_code, $cookiebot_id );
         // phpcs:disable
         echo $cookiebot_code;
@@ -56,7 +56,10 @@ function mtps_head_scripts() {
 
     if ( $gtm_id ) {
         // If we have Cookiebot in use, we need data-cookieconsent attribute for the script.
-        $scripts_ignore = $cookiebot_id ? ' data-cookieconsent="ignore"' : '';
+        //$scripts_ignore = $cookiebot_id ? ' data-cookieconsent="ignore"' : '';
+        
+        // For now use data-cookieconsent ignore value despite having cookiebot in use or not.
+        $scripts_ignore = ' data-cookieconsent="ignore"';
         // Set code.
         $gtm_code =
         "<!-- Google Tag Manager -->
